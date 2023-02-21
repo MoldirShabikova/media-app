@@ -13,7 +13,7 @@ function Header() {
       
       <div className="profile">
         <img
-          src="https://preview.redd.it/dtqfxnygwx471.png?auto=webp&s=0d547ff02e736bf56a8d050bd0aff38281b8e3d2"
+          src=""
           alt=""
         />
         </div>
