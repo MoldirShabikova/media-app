@@ -134,3 +134,7 @@ button:hover {
   font-weight: 700;
   color: #333;
 }
+
+.links{
+    margin: 20px;
+}

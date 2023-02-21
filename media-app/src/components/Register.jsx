@@ -1,22 +1,91 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./register.css";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import AuthContext from "../store/authContext";
+
 
 function Register() {
-  const [isRegister, setIsRegister] = useState(true);
+      const [message, setMessage] = useState("");
+      const [display, setDisplay] = useState("none");
+      const [user, setUser] = useState({
+          username: "",
+          email: "",
+         password: "",
+       
+      });
+    
+    const navigate = useNavigate();
+    const authCtx = useContext(AuthContext);
+    
+const handleChange = (e) => {
+  const name = e.target.name;
+  const value = e.target.value;
+  console.log(name, value);
+  setUser({ ...user, [name]: value });
+};
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+  if (user.username && user.email && user.password) {
+    const newUser = {
+      username: user.username,
+      email: user.email,
+      password: user.password,
+    };
+    axios
+      .post("http://localhost:8080/register", newUser)
+      .then(({ data }) => {
+        console.log("After Auth", data);
+        navigateTo();
+        const { token, exp, userId } = data;
+        authCtx.login(token, exp, userId);
+      })
+      .catch((err) => {
+        console.log(err);
+        setMessage(err.response.data);
+      });
+  }
+  setUser({
+      username: "",
+      email: "",
+    password: "",
+   
+  });
+};
+
+const navigateTo = () => {
+  navigate("/login");
+};
+
   return (
     <div className="login">
       <div className="card">
         <div>
           <h1>Register</h1>
 
-          <form className="form">
+          <form onSubmit={handleSubmit} className="form">
             <label htmlFor="name">
               Name
-              <input type="text" name="name" id="name" placeholder="name" />
+              <input
+                type="text"
+                name="username"
+                id="name"
+                placeholder="name"
+                value={user.username}
+                onChange={handleChange}
+              />
             </label>
             <label htmlFor="email">
               Email
-              <input type="email" name="email" id="email" placeholder="email" />
+              <input
+                type="email"
+                name="email"
+                id="email"
+                placeholder="email"
+                value={user.email}
+                onChange={handleChange}
+              />
             </label>
             <label htmlFor="password">
               Password
@@ -25,6 +94,8 @@ function Register() {
                 name="password"
                 id="password"
                 placeholder="password"
+                value={user.password}
+                onChange={handleChange}
               />
             </label>
             <button>Register</button>
@@ -56,8 +127,8 @@ function Register() {
             </div>
 
             <div className="links">
-              <a href="#">Forgot password?</a>
-              <a href="#">Have an account? Sign in</a>
+              {/* <p>Forgot password?</p> */}
+              <p onClick={navigateTo}>Have an account? Sign in</p>
             </div>
           </form>
         </div>

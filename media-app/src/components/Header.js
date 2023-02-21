@@ -1,25 +1,65 @@
-import React from "react";
-import "./Header.css"
+import { useContext } from "react";
+import { NavLink } from "react-router-dom";
 
-function Header() {
+import AuthContext from "../store/authContext";
+
+
+const Header = () => {
+  const authCtx = useContext(AuthContext);
+
+  const styleActiveLink = ({ isActive }) => {
+    return {
+      color: isActive ? "#f57145" : "",
+    };
+  };
+
   return (
-    <nav className="header">
-      <div className="logo">
-       Logo
+    <header className="header flex-row">
+      <div className="flex-row">
+        <img src="" alt="dm-logo" className="logo" />
+        <h2>Social Media App</h2>
       </div>
-      <div className="button-container">
-        <button className="button">Create</button>
-        <button className="button">Sign in</button>
-      
-      <div className="profile">
-        <img
-          src=""
-          alt=""
-        />
-        </div>
-      </div>
-    </nav>
+      <nav>
+        {authCtx.token ? (
+          <ul className="main-nav">
+            <li>
+              <NavLink style={styleActiveLink} to="/">
+                Home
+              </NavLink>
+            </li>
+            <li>
+              <NavLink style={styleActiveLink} to="profile">
+                Profile
+              </NavLink>
+            </li>
+            <li>
+              <NavLink style={styleActiveLink} to="form">
+                Add Post
+              </NavLink>
+            </li>
+            <li>
+              <button className="logout-btn" onClick={() => authCtx.logout()}>
+                Logout
+              </button>
+            </li>
+          </ul>
+        ) : (
+          <ul className="main-nav">
+            <li>
+              <NavLink style={styleActiveLink} to="/">
+                Home
+              </NavLink>
+            </li>
+            <li>
+              <NavLink style={styleActiveLink} to="/auth">
+                Login or Sign Up
+              </NavLink>
+            </li>
+          </ul>
+        )}
+      </nav>
+    </header>
   );
-}
+};
 
 export default Header;

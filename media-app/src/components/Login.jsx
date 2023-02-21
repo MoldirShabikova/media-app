@@ -1,19 +1,72 @@
 import "./login.css";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import AuthContext from "../store/authContext";
 
-function Login() {
-  const [isLogin, setIsLogin] = useState(false);
+function Login({setLogin}) {
+  // const [isLogin, setIsLogin] = useState(false);
+  const [message, setMessage] = useState("");
+      const [display, setDisplay] = useState("none");
+    const [user, setUser] = useState({ username: "", password: "" });
+    const navigate = useNavigate();
+  const authCtx = useContext(AuthContext);
+  
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    console.log(name, value);
+    setUser({ ...user, [name]: value });
+  };
 
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (user.username && user.password) {
+      const newUser = {
+        username: user.username,
+        password: user.password,
+      };
+      axios
+        .post("http://localhost:8080/login", newUser)
+        .then(({ data }) => {
+          console.log("After Auth login", data);
+          const { token, exp, userId } = data;
+          authCtx.login(token, exp, userId);
+          navigate("/dashboard");
+        })
+        .catch((err) => {
+          console.log(err);
+          setMessage(err.response.data);
+          setDisplay("block");
+        });
+
+      console.log("submitHandler called in registerForm");
+    }
+    setUser({ username: "", password: "" });
+  };
+
+const navigateTo = () => {
+  navigate("/register");
+  setLogin(false);
+};
   return (
     <div className="login">
       <div className="card">
         <div>
           <h1>Log in</h1>
 
-          <form className="form">
+          <form onSubmit={handleSubmit} className="form">
             <label htmlFor="email">
               Email
-              <input type="email" name="email" id="email" placeholder="email" />
+              <input
+                type="email"
+                name="username"
+                id="email"
+                placeholder="email"
+                value={user.username}
+                onChange={handleChange}
+              />
             </label>
             <label htmlFor="password">
               Password
@@ -22,6 +75,8 @@ function Login() {
                 name="password"
                 id="password"
                 placeholder="password"
+                value={user.password}
+                onChange={handleChange}
               />
             </label>
             <button>Log in</button>
@@ -53,8 +108,7 @@ function Login() {
             </div>
 
             <div className="links">
-              <a href="#">Forgot password?</a>
-              <a href="#">Don't have an account? Sign up</a>
+              <p onClick={navigateTo}>Don't have an account? Sign up</p>
             </div>
           </form>
         </div>
