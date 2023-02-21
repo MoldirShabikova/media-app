@@ -8,7 +8,7 @@ function Login({setLogin}) {
   // const [isLogin, setIsLogin] = useState(false);
   const [message, setMessage] = useState("");
       const [display, setDisplay] = useState("none");
-    const [user, setUser] = useState({ username: "", password: "" });
+    const [user, setUser] = useState({ email: "", password: "" });
     const navigate = useNavigate();
   const authCtx = useContext(AuthContext);
   
@@ -22,9 +22,9 @@ function Login({setLogin}) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (user.username && user.password) {
+    if (user.email && user.password) {
       const newUser = {
-        username: user.username,
+        email: user.email,
         password: user.password,
       };
       axios
@@ -43,7 +43,7 @@ function Login({setLogin}) {
 
       console.log("submitHandler called in registerForm");
     }
-    setUser({ username: "", password: "" });
+    setUser({ email: "", password: "" });
   };
 
 const navigateTo = () => {
@@ -61,10 +61,10 @@ const navigateTo = () => {
               Email
               <input
                 type="email"
-                name="username"
+                name="email"
                 id="email"
                 placeholder="email"
-                value={user.username}
+                value={user.email}
                 onChange={handleChange}
               />
             </label>

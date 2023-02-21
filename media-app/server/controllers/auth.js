@@ -52,31 +52,28 @@ module.exports = {
 
   login: async (req, res) => {
     try {
-      const { username, password } = req.body;
-      let foundUser = await User.findOne({ where: { username } });
+      const {email, password } = req.body;
+      let foundUser = await User.findOne({ where: { email } });
       if (foundUser) {
-        const isAuthenticated = bcrypt.compareSync(
-          password,
-          foundUser.password
-        );
+        const isAuthenticated = bcrypt.compareSync(password, foundUser.password);
 
         if (isAuthenticated) {
           const token = createToken(
-            foundUser.dataValues.username,
+            foundUser.dataValues.email,
             foundUser.dataValues.id
           );
           const exp = Date.now() + 1000 * 60 * 60 * 48;
           res.status(200).send({
-            username: foundUser.dataValues.username,
+            email: foundUser.dataValues.email,
             userId: foundUser.dataValues.id,
             token,
             exp,
           });
         } else {
-          res.status(400).send("cannot log in");
+          res.status(400).send("cannot log in is authenticated");
         }
       } else {
-        res.status(400).send("cannot log in");
+        res.status(400).send("cannot log in in found user");
       }
     } catch (error) {
       console.log("ERROR IN register");
