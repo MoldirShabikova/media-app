@@ -9,6 +9,8 @@ const Home = () => {
 
   const [posts, setPosts] = useState([]);
 
+
+  
   useEffect(() => {
     axios
       .get(`${url}/posts`)
@@ -25,7 +27,7 @@ const Home = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [posts]);
 
   const mappedPosts = posts.map((post) => {
     return (

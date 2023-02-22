@@ -13,5 +13,6 @@ module.exports = {
     username: DataTypes.STRING,
     email: DataTypes.STRING,
     password: DataTypes.STRING,
+    // image: DataTypes.STRING,
   }),
 };

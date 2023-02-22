@@ -1,0 +1,12 @@
+
+
+main {
+  position: relative;
+  top: 5.4rem;
+}
+main .container {
+  display: grid;
+  grid-template-columns: 25vh auto 20vw;
+  column-gap: 2rem;
+  position: relative;
+}

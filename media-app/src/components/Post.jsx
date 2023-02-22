@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 import AuthContext from "../store/authContext";
+import "./Post.css"
 
 const Form = () => {
   const url = "http://localhost:8080";
@@ -11,6 +12,7 @@ const Form = () => {
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [image, setImage] = useState('')
   const [status, setStatus] = useState(true);
 
   const handleSubmit = (e) => {
@@ -19,7 +21,7 @@ const Form = () => {
     axios
       .post(
         `${url}/posts`,
-        { title, content, status, userId },
+        { title, content, status, userId, image },
         {
           headers: {
             authorization: token,
@@ -34,7 +36,8 @@ const Form = () => {
 
   return (
     <main>
-      <form className="form add-post-form" onSubmit={handleSubmit}>
+      <div className="container">
+      <form className="" onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="title"
@@ -42,14 +45,19 @@ const Form = () => {
           onChange={(e) => setTitle(e.target.value)}
           className="form-input add-post-input"
         />
+        <input
+          type='file'
+          placeholder="image"
+          onChange={(e) => setTitle(e.target.value)}
+        />
         <textarea
           type="text"
           placeholder="content"
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          className="form-input add-post-input textarea"
+          className=""
         />
-        <div className="flex-row status-container">
+        <div className="">
           <div className="radio-btn">
             <label htmlFor="private-status">private:</label>
             <input
@@ -60,7 +68,8 @@ const Form = () => {
               onChange={(e) => setStatus(e.target.value)}
               checked={true}
             />
-          </div>
+            </div>
+            
           <div className="radio-btn">
             <label htmlFor="public-status">public:</label>
             <input
@@ -72,8 +81,9 @@ const Form = () => {
             />
           </div>
         </div>
-        <button className="form-btn">submit</button>
+        <button className="btn btn-primary">submit</button>
       </form>
+      </div>
     </main>
   );
 };

@@ -37,6 +37,8 @@ body {
 
 .btn {
   display: inline-block;
+  justify-content:center ;
+  align-items: center;
   padding: var(--btn-padding);
   font-weight: 500;
   border-radius: var(--border-radius);
