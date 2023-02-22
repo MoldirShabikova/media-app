@@ -36,7 +36,7 @@ const getLocalData = () => {
 
 export const AuthContextProvider = (props) => {
   const localData = getLocalData();
-
+console.log(localData, "localData");
   let initialToken;
   if (localData) {
     initialToken = localData.token;
@@ -51,6 +51,7 @@ export const AuthContextProvider = (props) => {
     localStorage.removeItem("token");
     localStorage.removeItem("exp");
     localStorage.removeItem("userId");
+    localStorage.removeItem("username");
 
     if (logoutTimer) {
       console.log("logout");
@@ -58,12 +59,14 @@ export const AuthContextProvider = (props) => {
     }
   }, []);
 
-  const login = (token, expTime, userId) => {
+  const login = (token, expTime, userId, username) => {
+    console.log(token, expTime, userId, username, 'check');
     setToken(token);
     setUserId(userId);
     localStorage.setItem("token", token);
-    localStorage.setItem("expTime", expTime);
+    localStorage.setItem("exp", expTime);
     localStorage.setItem("userId", JSON.stringify(userId));
+    localStorage.setItem("username", username);
 
     const remainingTime = calculateRemainingTime(expTime);
     console.log("login");

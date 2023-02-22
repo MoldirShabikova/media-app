@@ -38,8 +38,8 @@ const handleSubmit = (e) => {
       .then(({ data }) => {
         console.log("After Auth", data);
         navigateTo();
-        const { token, exp, userId } = data;
-        authCtx.login(token, exp, userId);
+        const { token, exp, userId, username } = data;
+        authCtx.login(token, exp, userId, username);
       })
       .catch((err) => {
         console.log(err);

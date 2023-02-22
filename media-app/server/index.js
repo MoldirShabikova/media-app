@@ -2,6 +2,9 @@ require("dotenv").config();
 
 const express = require("express");
 const cors = require("cors");
+const multer = require("multer");
+const upload = multer({ dest: "uploads/" });
+
 const { sequelize } = require("./util/db");
 const { SERVER_PORT } = process.env;
 const { User } = require("./models/user");

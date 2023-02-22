@@ -66,6 +66,7 @@ module.exports = {
           res.status(200).send({
             email: foundUser.dataValues.email,
             userId: foundUser.dataValues.id,
+            username: foundUser.dataValues.username,
             token,
             exp,
           });

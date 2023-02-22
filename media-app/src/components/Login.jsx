@@ -31,8 +31,8 @@ function Login({setLogin}) {
         .post("http://localhost:8080/login", newUser)
         .then(({ data }) => {
           console.log("After Auth login", data);
-          const { token, exp, userId } = data;
-          authCtx.login(token, exp, userId);
+          const { token, exp, userId, username } = data;
+          authCtx.login(token, exp, userId, username);
           navigate("/ ");
         })
         .catch((err) => {

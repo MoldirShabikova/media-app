@@ -7,6 +7,7 @@ import person  from "../assests/person.jpg"
 
 const Header = () => {
   const authCtx = useContext(AuthContext);
+  const username = localStorage.getItem("username");
 
  
 
@@ -34,6 +35,7 @@ const Header = () => {
                   <div className="profile-photo">
                     <img src={person} alt="person" />
                   </div>
+                    <h1>Welcome, {username}</h1>
                 </NavLink>
               </li>
               <li>
