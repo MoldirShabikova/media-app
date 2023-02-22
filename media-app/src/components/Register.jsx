@@ -98,6 +98,7 @@ const navigateTo = () => {
                 onChange={handleChange}
               />
             </label>
+            <div><h1>{ message}</h1></div>
             <button>Register</button>
 
             <div className="divider">

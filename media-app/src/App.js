@@ -9,12 +9,13 @@ import Home from "./components/Home";
 import Profile from "./components/Profile";
 import Post from "./components/Post"
 
-
+import "./App.css"
 function App() {
   const authCtx = useContext(AuthContext);
 
+
   return (
-    <div className="App">
+    <main>
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -23,7 +24,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route
           path="/profile"
-          element={authCtx.token ? <Profile /> : <Navigate to="/auth" />}
+          element={authCtx.token ? <Profile /> : <Navigate to="/" />}
         />
         <Route
           path="/form"
@@ -32,7 +33,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         {/* <Route path="*" element={<Navigate to="/" />} /> */}
       </Routes>
-    </div>
+    </main>
   );
 }
 

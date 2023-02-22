@@ -1,39 +1,41 @@
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import "./Header.css"
 
 import AuthContext from "../store/authContext";
-
+import person  from "../assests/person.jpg"
 
 const Header = () => {
   const authCtx = useContext(AuthContext);
 
-  const styleActiveLink = ({ isActive }) => {
-    return {
-      color: isActive ? "#f57145" : "",
-    };
-  };
+ 
 
   return (
-    <header className="header flex-row">
-      <div className="flex-row">
-        <img src="" alt="dm-logo" className="logo" />
-        <h2>Social Media App</h2>
+    <nav className="container">
+      <h2 className="logo">Social App</h2>
+
+      <div className="search-bar">
+        <i className="uil uil-search"></i>
+        <input type="search" placeholder="Search for creators, inspirations" />
       </div>
-      <nav>
+      <div className="create">
+        <div className="profile-photo">
+          <img src={person} alt="person" />
+        </div>
         {authCtx.token ? (
-          <ul className="main-nav">
+          <ul className="nav-link">
             <li>
-              <NavLink style={styleActiveLink} to="/">
+              <NavLink  to="/">
                 Home
               </NavLink>
             </li>
             <li>
-              <NavLink style={styleActiveLink} to="/profile">
+              <NavLink  to="/profile">
                 Profile
               </NavLink>
             </li>
             <li>
-              <NavLink style={styleActiveLink} to="form">
+              <NavLink  to="/form">
                 Add Post
               </NavLink>
             </li>
@@ -44,21 +46,26 @@ const Header = () => {
             </li>
           </ul>
         ) : (
-          <ul className="main-nav">
+          <ul>
             <li>
-              <NavLink style={styleActiveLink} to="/">
+              <NavLink  to="/">
                 Home
               </NavLink>
             </li>
             <li>
-              <NavLink style={styleActiveLink} to="/auth">
+              <NavLink  to="/profile">
+                Profile
+              </NavLink>
+            </li>
+            <li>
+              <NavLink  to="/auth">
                 Login or Sign Up
               </NavLink>
             </li>
           </ul>
         )}
-      </nav>
-    </header>
+      </div>
+    </nav>
   );
 };
 

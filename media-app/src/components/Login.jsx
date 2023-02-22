@@ -33,7 +33,7 @@ function Login({setLogin}) {
           console.log("After Auth login", data);
           const { token, exp, userId } = data;
           authCtx.login(token, exp, userId);
-          navigate("/dashboard");
+          navigate("/ ");
         })
         .catch((err) => {
           console.log(err);
