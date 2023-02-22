@@ -8,7 +8,13 @@ const { User } = require("./models/user");
 const { Post } = require("./models/post");
 const { register, login } = require("./controllers/auth");
 const { isAuthenticated } = require("./middleware/isAuthenticated");
-
+const {
+  getAllPosts,
+  getCurrentUserPosts,
+  addPost,
+  editPost,
+  deletePost,
+} = require("./controllers/posts");
 const app = express();
 
 app.use(express.json());
@@ -21,7 +27,13 @@ Post.belongsTo(User);
 app.post('/register', register);
 app.post('/login', login);
 
+app.get("/posts", getAllPosts);
 
+
+app.get("/userposts/:userId", getCurrentUserPosts);
+app.post("/posts", isAuthenticated, addPost);
+app.put("/posts/:id", isAuthenticated, editPost);
+app.delete("/posts/:id", isAuthenticated, deletePost);
 //connecting to my backend
 sequelize
   .sync()

@@ -55,7 +55,7 @@ const handleSubmit = (e) => {
 };
 
 const navigateTo = () => {
-  navigate("/login");
+  navigate("/");
 };
 
   return (
