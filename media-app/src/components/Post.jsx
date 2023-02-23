@@ -1,9 +1,8 @@
 import { useState, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
 import AuthContext from "../store/authContext";
-import "./Post.css"
+import "./Post.css";
 
 const Form = () => {
   const url = "http://localhost:8080";
@@ -12,29 +11,32 @@ const Form = () => {
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [image, setImage] = useState('')
-  const [status, setStatus] = useState(true);
-
+  const [file, setFile] = useState('');
+  const [status, setStatus] = useState("true");
 
   const handleInputImage = (e) => {
-    setImage(e.target.files[0])
+    setFile(e.target.files[0]);
     console.log(e.target.files[0]);
-    
-  }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-console.log(image, "image")
+    console.log(userId, 'userID')
+    console.log(localStorage.getItem('userId', userId))
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("content", content);
+    formData.append("status", status);
+    formData.append("userId", localStorage.getItem('userId'));
+    formData.append("file", file);
+
     axios
-      .post(
-        `${url}/posts`,
-        { title, content, status, userId, image:image.name },
-        {
-          headers: {
-            authorization: token,
-          },
-        }
-      )
+      .post(`${url}/posts`, formData, {
+        headers: {
+          authorization: token,
+          "Content-Type": "multipart/form-data",
+        },
+      })
       .then(() => {
         navigate("/profile");
       })
@@ -56,7 +58,13 @@ console.log(image, "image")
             onChange={(e) => setTitle(e.target.value)}
             className="form-input add-post-input"
           />
-          <input type="file" placeholder="image" onChange={handleInputImage} />
+          {file && <img src={URL.createObjectURL(file)} />}
+          <input
+            type="file"
+            name="file"
+            onChange={handleInputImage}
+            className=""
+          />
           <textarea
             type="text"
             placeholder="content"
@@ -71,9 +79,9 @@ console.log(image, "image")
                 type="radio"
                 name="status"
                 id="private-status"
-                value={true}
-                onChange={(e) => setStatus(e.target.value)}
-                checked={true}
+                value="true"
+                onChange={(e) => setStatus(e.target.value.toString())}
+                checked={status === "true"}
               />
             </div>
 
@@ -83,8 +91,9 @@ console.log(image, "image")
                 type="radio"
                 name="status"
                 id="public-status"
-                value={false}
-                onChange={(e) => setStatus(e.target.value)}
+                value="false"
+                onChange={(e) => setStatus(e.target.value.toString())}
+                checked={status === "false"}
               />
             </div>
           </div>

@@ -3,11 +3,12 @@ import { NavLink } from "react-router-dom";
 import "./Header.css"
 
 import AuthContext from "../store/authContext";
-import person  from "../assests/person.jpg"
+// import person  from "../assests/person.jpg"
 
 const Header = () => {
   const authCtx = useContext(AuthContext);
   const username = localStorage.getItem("username");
+  const image = localStorage.getItem("image")
 
  
 
@@ -33,7 +34,7 @@ const Header = () => {
               <li>
                 <NavLink to="/profile">
                   <div className="profile-photo">
-                    <img src={person} alt="person" />
+                    <img src={image} alt="person" />
                   </div>
                     <h1>Welcome, {username}</h1>
                 </NavLink>

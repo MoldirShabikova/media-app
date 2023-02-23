@@ -13,7 +13,7 @@ const Profile = () => {
 
   const getUserPosts = useCallback(() => {
     axios
-      .get(`${url}/userposts/${userId}`)
+      .get(`${url}/userposts/${localStorage.getItem('userId')}`)
       .then((res) => setPosts(res.data))
       .catch((err) => console.log(err));
   }, [userId]);
@@ -64,6 +64,7 @@ const Profile = () => {
         <h2>{post.title}</h2>
         <h4>{post.user.username}</h4>
         <p>{post.content}</p>
+        <img src={`./upload/${post.image}`} alt={post.image} style={{width: 100, height:100} } />
 
         {userId === post.userId && (
           <div>

@@ -3,7 +3,6 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const multer = require("multer");
-const upload = multer({ dest: "uploads/" });
 
 const { sequelize } = require("./util/db");
 const { SERVER_PORT } = process.env;
@@ -23,20 +22,33 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+// Multer configuration
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "./public/upload");
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + file.originalname);
+  },
+});
+const upload = multer({ storage: storage });
+
 User.hasMany(Post);
 Post.belongsTo(User);
+// User.hasMany(Comments);
+// Comments.belongsTo(Post)
 
 //Auth
-app.post('/register', register);
-app.post('/login', login);
+app.post("/register", register);
+app.post("/login", login);
 
 app.get("/posts", getAllPosts);
 
-
 app.get("/userposts/:userId", getCurrentUserPosts);
-app.post("/posts", isAuthenticated, addPost);
-app.put("/posts/:id", isAuthenticated, editPost);
+app.post("/posts", isAuthenticated, upload.single("file"), addPost);
+app.put("/posts/:id", isAuthenticated, upload.single("file"), editPost);
 app.delete("/posts/:id", isAuthenticated, deletePost);
+
 //connecting to my backend
 sequelize
   .sync()

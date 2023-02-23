@@ -52,6 +52,7 @@ console.log(localData, "localData");
     localStorage.removeItem("exp");
     localStorage.removeItem("userId");
     localStorage.removeItem("username");
+    localStorage.removeItem('image')
 
     if (logoutTimer) {
       console.log("logout");
@@ -59,7 +60,7 @@ console.log(localData, "localData");
     }
   }, []);
 
-  const login = (token, expTime, userId, username) => {
+  const login = (token, expTime, userId, username, image) => {
     console.log(token, expTime, userId, username, 'check');
     setToken(token);
     setUserId(userId);
@@ -67,6 +68,7 @@ console.log(localData, "localData");
     localStorage.setItem("exp", expTime);
     localStorage.setItem("userId", JSON.stringify(userId));
     localStorage.setItem("username", username);
+    localStorage.setItem('image', image)
 
     const remainingTime = calculateRemainingTime(expTime);
     console.log("login");

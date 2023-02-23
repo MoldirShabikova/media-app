@@ -23,12 +23,19 @@ module.exports = {
   },
   addPost: async (req, res) => {
     try {
-      const { title, content, status, userId, image } = req.body;
-
-      await Post.create({ title, content, privateStatus: status, userId,image });
-      res.sendStatus(200);
+      const { title, content, status, userId } = req.body;
+      const file = req.file;
+      console.log(req.body, 'body')
+      await Post.create({
+        title,
+        content,
+        privateStatus: status,
+        userId,
+        image: file.filename,
+      });
+      res.status(200).json({ message: "Post created successfully." });
     } catch (error) {
-      console.log("ERROR IN getCurrentUserPosts");
+      console.log("ERROR IN addPost");
       console.log(error);
       res.sendStatus(400);
     }

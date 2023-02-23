@@ -7,11 +7,11 @@ import AuthContext from "../store/authContext";
 
 function Register() {
       const [message, setMessage] = useState("");
-      const [display, setDisplay] = useState("none");
       const [user, setUser] = useState({
           username: "",
           email: "",
-         password: "",
+        password: "",
+        image: "",
        
       });
     
@@ -27,19 +27,20 @@ const handleChange = (e) => {
 
 const handleSubmit = (e) => {
   e.preventDefault();
-  if (user.username && user.email && user.password) {
+  if (user.username && user.email && user.password && user.image) {
     const newUser = {
       username: user.username,
       email: user.email,
       password: user.password,
+      image: user.image
     };
     axios
       .post("http://localhost:8080/register", newUser)
       .then(({ data }) => {
         console.log("After Auth", data);
         navigateTo();
-        const { token, exp, userId, username } = data;
-        authCtx.login(token, exp, userId, username);
+        const { token, exp, userId, username, image } = data;
+        authCtx.login(token, exp, userId, username, image);
       })
       .catch((err) => {
         console.log(err);
@@ -50,6 +51,7 @@ const handleSubmit = (e) => {
       username: "",
       email: "",
     password: "",
+    image: "",
    
   });
 };
@@ -98,7 +100,20 @@ const navigateTo = () => {
                 onChange={handleChange}
               />
             </label>
-            <div><h1>{ message}</h1></div>
+            <label htmlFor="password">
+              Image
+              <input
+                type="text"
+                name="image"
+                id="image"
+                placeholder="image"
+                value={user.image}
+                onChange={handleChange}
+              />
+            </label>
+            <div>
+              <h1>{message}</h1>
+            </div>
             <button>Register</button>
 
             <div className="divider">
