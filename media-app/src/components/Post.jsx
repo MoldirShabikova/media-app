@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../store/authContext";
 import "./Post.css";
+import "animate.css/animate.min.css";
 
 const Form = () => {
   const url = "http://localhost:8080";
@@ -47,7 +48,7 @@ const Form = () => {
     <main>
       <div className="container">
         <form
-          className=""
+          className="animate__animated animate__fadeIn"
           onSubmit={handleSubmit}
           encType="multipart/form-data"
         >

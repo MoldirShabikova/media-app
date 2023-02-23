@@ -8,6 +8,7 @@ const { sequelize } = require("./util/db");
 const { SERVER_PORT } = process.env;
 const { User } = require("./models/user");
 const { Post } = require("./models/post");
+const {Comments} = require("./models/comments")
 const { register, login } = require("./controllers/auth");
 const { isAuthenticated } = require("./middleware/isAuthenticated");
 const {
@@ -35,8 +36,8 @@ const upload = multer({ storage: storage });
 
 User.hasMany(Post);
 Post.belongsTo(User);
-// User.hasMany(Comments);
-// Comments.belongsTo(Post)
+User.hasMany(Comments);
+Comments.belongsTo(Post)
 
 //Auth
 app.post("/register", register);

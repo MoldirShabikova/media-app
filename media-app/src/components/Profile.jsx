@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState, useCallback } from "react";
 import axios from "axios";
-
+import "./profile.css"; 
 import AuthContext from "../store/authContext";
 
 const Profile = () => {
