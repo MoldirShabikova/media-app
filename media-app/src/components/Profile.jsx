@@ -7,9 +7,10 @@ const Profile = () => {
   const { userId, token } = useContext(AuthContext);
   const [posts, setPosts] = useState([]);
 
+console.log(userId, 'userID')
   const getUserPosts = useCallback(() => {
     axios
-      .get(`${url}/userposts/${localStorage.getItem('userId')}`)
+      .get(`${url}/userposts/${userId}`)
       .then((res) => setPosts(res.data))
       .catch((err) => console.log(err));
   }, [userId]);
@@ -54,7 +55,7 @@ const Profile = () => {
   };
 
   const mappedPosts = posts.map((post) => {
-    console.log(post.userId, "test");
+    console.log(post.userId, "test", userId);
     return (
   
       <div key={post.id} >
@@ -64,11 +65,12 @@ const Profile = () => {
           <p>{post.content}</p>
           <img src={`./upload/${post.image}`} alt={post.image} style={{ width: 200,  height:200 }} />
 
-          {userId === post.userId && (
+          {+userId === post.userId && (
             <div>
               <button
                 className="btn btn-primary"
                 onClick={() => updatePost(post.id, post.privateStatus)}
+
               >
                 {post.privateStatus ? "make public" : "make private"}
               </button>

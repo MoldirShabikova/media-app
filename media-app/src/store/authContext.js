@@ -19,7 +19,6 @@ const calculateRemainingTime = (exp) => {
 const getLocalData = () => {
   const storedToken = localStorage.getItem("token");
   const storedExp = localStorage.getItem("exp");
-
   const remainingTime = calculateRemainingTime(storedExp);
 
   if (remainingTime <= 1000 * 60 * 30) {
@@ -31,6 +30,7 @@ const getLocalData = () => {
   return {
     token: storedToken,
     duration: remainingTime,
+    userId: localStorage.getItem('userId')
   };
 };
 
@@ -38,14 +38,16 @@ export const AuthContextProvider = (props) => {
   const localData = getLocalData();
 console.log(localData, "localData");
   let initialToken;
+  let initialId;
+
   if (localData) {
     initialToken = localData.token;
+    initialId = localData.userId;
   }
 
   const [token, setToken] = useState(initialToken);
-  const [userId, setUserId] = useState(null);
   const [image, setImage] = useState('')
-
+  const [userId, setUserId] = useState(initialId);
   const logout = useCallback(() => {
     setToken(null);
     setUserId(null);
@@ -68,7 +70,7 @@ console.log(localData, "localData");
     setImage(image)
     localStorage.setItem("token", token);
     localStorage.setItem("exp", expTime);
-    localStorage.setItem("userId", JSON.stringify(userId));
+    localStorage.setItem("userId", userId);
     localStorage.setItem("username", username);
     localStorage.setItem('image', image)
 

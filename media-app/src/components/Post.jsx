@@ -9,8 +9,7 @@ const Form = () => {
   const url = "http://localhost:8080";
   const { token, userId } = useContext(AuthContext);
   const navigate = useNavigate();
-  const { contextValue } = useContext(AuthContext)
-  console.log(contextValue, "contextValue");
+ 
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -30,7 +29,7 @@ const Form = () => {
     formData.append("title", title);
     formData.append("content", content);
     formData.append("status", status);
-    formData.append("userId", localStorage.getItem('userId'));
+    formData.append("userId",userId);
     formData.append("file", file);
 
     axios

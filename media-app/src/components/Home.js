@@ -107,16 +107,16 @@ const Home = () => {
     <>
       <LeftProfile />
       <div className="middle">
-        <Stories/>
-      <div className="middle">{mappedPosts}</div> 
+       
+        <Stories />
+        <div className="middle">{mappedPosts}</div>
       </div>
-     
     </>
   ) : (
     <main>
+      <LeftProfile />
       <h1>There are no posts yet!</h1>
-      </main>
-    
+    </main>
   );
 };
 

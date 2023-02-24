@@ -13,13 +13,6 @@ module.exports = {
             attributes: [`username`],
           },
         ],
-        include: [
-          {
-            model: Comments,
-            required: true,
-            attributes: [`description`],
-          },
-        ],
       });
       res.status(200).send(posts);
     } catch (error) {
