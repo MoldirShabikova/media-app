@@ -1,15 +1,11 @@
 import { useContext, useEffect, useState, useCallback } from "react";
 import axios from "axios";
-import "./profile.css"; 
 import AuthContext from "../store/authContext";
 
 const Profile = () => {
   const url = "http://localhost:8080";
   const { userId, token } = useContext(AuthContext);
-
   const [posts, setPosts] = useState([]);
-
-  console.log(userId, "id");
 
   const getUserPosts = useCallback(() => {
     axios
@@ -60,35 +56,44 @@ const Profile = () => {
   const mappedPosts = posts.map((post) => {
     console.log(post.userId, "test");
     return (
-      <div key={post.id} className="post-card">
-        <h2>{post.title}</h2>
-        <h4>{post.user.username}</h4>
-        <p>{post.content}</p>
-        <img src={`./upload/${post.image}`} alt={post.image} style={{width: 100, height:100} } />
+  
+      <div key={post.id} >
+        <div className="post-box">
+          <h2>{post.title}</h2>
+          <h4>{post.user.username}</h4>
+          <p>{post.content}</p>
+          <img src={`./upload/${post.image}`} alt={post.image} style={{ width: 200,  height:200 }} />
 
-        {userId === post.userId && (
-          <div>
-            <button
-              className="form-btn"
-              onClick={() => updatePost(post.id, post.privateStatus)}
-            >
-              {post.privateStatus ? "make public" : "make private"}
-            </button>
-            <button
-              className="form-btn"
-              style={{ marginLeft: 10 }}
-              onClick={() => deletePost(post.id)}
-            >
-              delete post
-            </button>
-          </div>
-        )}
-      </div>
+          {userId === post.userId && (
+            <div>
+              <button
+                className="btn btn-primary"
+                onClick={() => updatePost(post.id, post.privateStatus)}
+              >
+                {post.privateStatus ? "make public" : "make private"}
+              </button>
+              <button
+                className="btn btn-primary"
+                style={{ marginLeft: 10 }}
+                onClick={() => deletePost(post.id)}
+              >
+                delete post
+              </button>
+            </div>
+          )}
+        </div>
+        </div>
+
     );
   });
 
   return mappedPosts.length >= 1 ? (
-    <main>{mappedPosts}</main>
+    <div className="middle">
+      <div >
+        {mappedPosts}
+      </div>
+      </div>
+     
   ) : (
     <main>
       <h1>You haven't posted yet!</h1>

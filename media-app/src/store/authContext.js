@@ -44,6 +44,7 @@ console.log(localData, "localData");
 
   const [token, setToken] = useState(initialToken);
   const [userId, setUserId] = useState(null);
+  const [image, setImage] = useState('')
 
   const logout = useCallback(() => {
     setToken(null);
@@ -64,6 +65,7 @@ console.log(localData, "localData");
     console.log(token, expTime, userId, username, 'check');
     setToken(token);
     setUserId(userId);
+    setImage(image)
     localStorage.setItem("token", token);
     localStorage.setItem("exp", expTime);
     localStorage.setItem("userId", JSON.stringify(userId));
@@ -84,6 +86,7 @@ console.log(localData, "localData");
 
   const contextValue = {
     token,
+    image,
     login,
     logout,
     userId,

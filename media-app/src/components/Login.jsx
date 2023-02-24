@@ -1,4 +1,3 @@
-import "./login.css";
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -7,9 +6,9 @@ import AuthContext from "../store/authContext";
 function Login({setLogin}) {
   // const [isLogin, setIsLogin] = useState(false);
   const [message, setMessage] = useState("");
-      const [display, setDisplay] = useState("none");
-    const [user, setUser] = useState({ email: "", password: "" });
-    const navigate = useNavigate();
+  const [display, setDisplay] = useState("none");
+  const [user, setUser] = useState({ email: "", password: "" });
+  const navigate = useNavigate();
   const authCtx = useContext(AuthContext);
   
   const handleChange = (e) => {
@@ -31,8 +30,8 @@ function Login({setLogin}) {
         .post("http://localhost:8080/login", newUser)
         .then(({ data }) => {
           console.log("After Auth login", data);
-          const { token, exp, userId, username } = data;
-          authCtx.login(token, exp, userId, username);
+          const { token, exp, userId, username, image } = data;
+          authCtx.login(token, exp, userId, username, image);
           navigate("/ ");
         })
         .catch((err) => {

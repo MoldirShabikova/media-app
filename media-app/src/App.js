@@ -15,29 +15,35 @@ function App() {
 
 
   return (
+    
     <main>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        {/* <Route path="/auth" element={<Auth />} /> */}
-             <Route
-          path="/auth"
-          element={!authCtx.token ? <Auth /> : <Navigate to="/" />}
-        />
       
-        <Route path="/login" element={<Login />} />
-        <Route
-          path="/profile"
-          element={authCtx.token ? <Profile /> : <Navigate to="/" />}
-        />
-        <Route
-          path="/post"
-          element={authCtx.token ? <Post /> : <Navigate to="/auth" />}
-        />
-        <Route path="/register" element={<Register />} />
-        {/* <Route path="*" element={<Navigate to="/" />} /> */}
-      </Routes>
-    </main>
+      <Header />
+      <div className="container">
+
+        <Routes>
+          <Route path="/" element={<Home />} />
+          {/* <Route path="/auth" element={<Auth />} /> */}
+          <Route
+            path="/auth"
+            element={!authCtx.token ? <Auth /> : <Navigate to="/" />}
+          />
+
+          <Route path="/login" element={<Login />} />
+          <Route
+            path="/profile"
+            element={authCtx.token ? <Profile /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/post"
+            element={authCtx.token ? <Post /> : <Navigate to="/auth" />}
+          />
+          <Route path="/register" element={<Register />} />
+          {/* <Route path="*" element={<Navigate to="/" />} /> */}
+        </Routes>
+        </div>
+      </main>
+ 
   );
 }
 

@@ -1,9 +1,9 @@
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
-import "./Header.css"
+
 
 import AuthContext from "../store/authContext";
-// import person  from "../assests/person.jpg"
+
 
 const Header = () => {
   const authCtx = useContext(AuthContext);
@@ -15,7 +15,9 @@ const Header = () => {
   return (
     <nav>
       <div className="container">
-        <h2 className="logo">Social App</h2>
+        <NavLink to="/" className="logo">
+          Social App
+        </NavLink>
         <div className="search-bar">
           <i className="uil uil-search"></i>
           <input
@@ -26,38 +28,27 @@ const Header = () => {
         <div className="create">
           {authCtx.token ? (
             <ul className="nav-link">
-              <li>
-                <NavLink className="btn btn-primary" to="/">
-                  Home
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/profile">
-                  <div className="profile-photo">
-                    <img src={image} alt="person" />
-                  </div>
-                    <h1>Welcome, {username}</h1>
-                </NavLink>
-              </li>
-              <li>
-                <NavLink className="btn btn-primary" to="/post">
-                  Add Post
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  className="btn btn-primary"
-                  onClick={() => authCtx.logout()}
-                >
-                  Logout
-                </NavLink>
-              </li>
+              <div className="nav-text">
+                <li>
+                  <NavLink to="/profile">
+                    <div className="profile-photo">
+                      <img src={image} alt="person" />
+                    </div>
+                  </NavLink>
+                </li>
+
+                <li>
+                  <NavLink
+                    className="btn btn-primary"
+                    onClick={() => authCtx.logout()}
+                  >
+                    Logout
+                  </NavLink>
+                </li>
+              </div>
             </ul>
           ) : (
             <ul>
-              {/* <li>
-              <NavLink to="/">Home</NavLink>
-            </li> */}
               <li>
                 <NavLink className="btn btn-primary" to="/auth">
                   Login or Sign Up

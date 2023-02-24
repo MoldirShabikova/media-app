@@ -69,6 +69,7 @@ module.exports = {
             email: foundUser.dataValues.email,
             userId: foundUser.dataValues.id,
             username: foundUser.dataValues.username,
+            image: foundUser.dataValues.image,
             token,
             exp,
           });

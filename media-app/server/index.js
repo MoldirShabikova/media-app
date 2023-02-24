@@ -37,6 +37,8 @@ const upload = multer({ storage: storage });
 User.hasMany(Post);
 Post.belongsTo(User);
 User.hasMany(Comments);
+Comments.belongsTo(User);
+Post.hasMany(Comments)
 Comments.belongsTo(Post)
 
 //Auth

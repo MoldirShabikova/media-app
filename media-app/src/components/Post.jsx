@@ -2,13 +2,15 @@ import { useState, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../store/authContext";
-import "./Post.css";
+
 import "animate.css/animate.min.css";
 
 const Form = () => {
   const url = "http://localhost:8080";
   const { token, userId } = useContext(AuthContext);
   const navigate = useNavigate();
+  const { contextValue } = useContext(AuthContext)
+  console.log(contextValue, "contextValue");
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -45,10 +47,11 @@ const Form = () => {
   };
 
   return (
-    <main>
-      <div className="container">
+    <div className="post-container">
+      <div className="post-box">
+        <h2>Add Post</h2>
         <form
-          className="animate__animated animate__fadeIn"
+          className=""
           onSubmit={handleSubmit}
           encType="multipart/form-data"
         >
@@ -57,7 +60,7 @@ const Form = () => {
             placeholder="title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="form-input add-post-input"
+            className="form-input "
           />
           {file && <img src={URL.createObjectURL(file)} />}
           <input
@@ -101,7 +104,7 @@ const Form = () => {
           <button className="btn btn-primary">submit</button>
         </form>
       </div>
-    </main>
+    </div>
   );
 };
 
