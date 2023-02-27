@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import AuthContext from "../store/authContext";
+import { Icon } from "@iconify/react";
 
 const Profile = () => {
   const url = "http://localhost:8080";
@@ -57,35 +58,37 @@ console.log(userId, 'userID')
   const mappedPosts = posts.map((post) => {
     console.log(post.userId, "test", userId);
     return (
-  
-      <div key={post.id} >
+      <div key={post.id}>
         <div className="post-box">
           <h2>{post.title}</h2>
           <h4>{post.user.username}</h4>
           <p>{post.content}</p>
-          <img src={`./upload/${post.image}`} alt={post.image} style={{ width: 200,  height:200 }} />
+          <img
+            src={`./upload/${post.image}`}
+            alt={post.image}
+            style={{ width: 200, height: 200 }}
+          />
 
           {+userId === post.userId && (
             <div>
               <button
                 className="btn btn-primary"
                 onClick={() => updatePost(post.id, post.privateStatus)}
-
               >
                 {post.privateStatus ? "make public" : "make private"}
               </button>
-              <button
-                className="btn btn-primary"
+              <Icon
+                icon="material-symbols:delete-outline"
                 style={{ marginLeft: 10 }}
                 onClick={() => deletePost(post.id)}
-              >
-                delete post
-              </button>
+              />
+            
+            
+           
             </div>
           )}
         </div>
-        </div>
-
+      </div>
     );
   });
 

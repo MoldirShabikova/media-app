@@ -4,6 +4,8 @@ import LeftProfile from "./LeftProfile";
 import AuthContext from "../store/authContext";
 import Stories from './Stories'
 import Comments from "./Comments";
+import { Icon } from "@iconify/react";
+
 const Home = () => {
   const url = "http://localhost:8080";
   const { userId, image } = useContext(AuthContext);
@@ -48,16 +50,16 @@ const Home = () => {
               <span className="edit">
                 <i className="uil uil-ellipsis-h"> </i>
               </span>
-              <div className="photo">
+              <div className="">
                 <img src={`./upload/${post.image}`} />
               </div>
               <div className="action-button">
                 <div className="interaction-buttons">
                   <span>
-                    <i className="uil uil-heart"></i>
+                    <Icon icon="uil:heart" />
                   </span>
                   <span>
-                    <i className="uil uil-comment-dots"></i>
+                    <Icon icon="uil:comments-alt" />
                   </span>
                   <span>
                     <i className="uil uil-share-alt"></i>
@@ -96,7 +98,7 @@ const Home = () => {
                 See Comments
               </div>
             </div>
-              {commentOpen && <Comments postId={post.id} />}
+            {commentOpen && <Comments postId={post.id} />}
           </div>
         </div>
       </div>
