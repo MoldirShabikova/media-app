@@ -61,35 +61,32 @@ console.log(userId, 'userID')
     console.log(post.userId, "test", userId);
     return (
       <>
-       
         <div className="" key={post.id}>
           <div className="feeds">
             <div className="feed">
+              <h2>{post.title}</h2>
+              <h4>{post.user.username}</h4>
+              <p>{post.content}</p>
+              <img src={`./upload/${post.image}`} alt={post.image} />
 
-        
-            <h2>{post.title}</h2>
-            <h4>{post.user.username}</h4>
-            <p>{post.content}</p>
-            <img
-              src={`./upload/${post.image}`}
-              alt={post.image}
-              style={{ width: 200, height: 200 }}
-            />
-
-            {+userId === post.userId && (
-              <div>
-                <button
-                  className="btn btn-primary"
-                  onClick={() => updatePost(post.id, post.privateStatus)}
-                >
-                  {post.privateStatus ? "make public" : "make private"}
-                </button>
-                <Icon
-                  icon="material-symbols:delete-outline"
-                  style={{ marginLeft: 10 }}
-                  onClick={() => deletePost(post.id)}
-                />
-              </div>
+              {+userId === post.userId && (
+                <div>
+                  <button
+                    className="btn btn-primary"
+                    style={{ width: 100 }}
+                    onClick={() => updatePost(post.id, post.privateStatus)}
+                  >
+                    {post.privateStatus ? "make public" : "make private"}
+                  </button>
+                  <button
+                    className="btn btn-primary"
+                    icon="material-symbols:delete-outline"
+                    style={{ marginLeft: 10, width: 100 }}
+                    onClick={() => deletePost(post.id)}
+                  >
+                    Delete{" "}
+                  </button>
+                </div>
               )}
             </div>
           </div>

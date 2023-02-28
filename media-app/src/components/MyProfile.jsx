@@ -50,12 +50,9 @@ const username = localStorage.getItem("username");
                                 <Icon icon="ic:outline-place" />
                                 <span>USA</span>
                             </div>
-                            <div className="item">
-                                <Icon icon="material-symbols:language-sharp" />
-                                <span></span>
-                            </div>
+                         
                         </div>
-                        <button>follow</button>
+                        {/* <button className="follow-btn">follow</button> */}
                     </div>
                     <div className="right"></div>
                 </div>
