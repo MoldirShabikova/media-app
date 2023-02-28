@@ -1,7 +1,4 @@
-
-
-
-    img {
+.comment-img {
       width: 40px;
       height: 40px;
       border-radius: 50%;
@@ -9,6 +6,7 @@
     }
 
     .write{
+      width: 100%;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -16,21 +14,28 @@
       margin: 20px 0px;
     }
 
-      input{
-        flex:5;
+      .comment-input{
+        
+      
         padding: 10px;
         border: 1px solid themed("border");
         background-color: transparent;
         color: themed("textColor");
       }
 
-      button{
+      .comment-btn{ 
+         display: flex;
+      align-items: center;
+        width: 10%;
         border: none;
         background-color: #5271ff;
         color: white;
-        padding: 10px;
+text-align: center;
         cursor: pointer;
-        border-radius: 3px;
+justify-content: center;
+      
+
+      margin: 20px 0px;
       }
 
 

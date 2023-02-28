@@ -3,7 +3,10 @@ import "./comments.css"
 import AuthContext from "../store/authContext";
 
 const Comments = () => {
-  const { contextValue } = useContext(AuthContext);
+  const { userId, token } = useContext(AuthContext);
+    const username = localStorage.getItem("username");
+  console.log(username, 'in comments');
+   const image = localStorage.getItem("image");
   //Temporary
   const comments = [
     {
@@ -26,15 +29,19 @@ const Comments = () => {
   return (
     <div className="comments">
       <div className="write">
-        <img src="" alt="" />
-        <input type="text" placeholder="write a comment" />
-        <button className="">Send</button>
-      </div>
+        <img className="comment-img" src={image} alt="" />
+        <input
+          className="comment-input"
+          type="text"
+          placeholder="write a comment"
+        />
+   <button className="comment-btn">Send</button>
+      </div>     
       {comments.map((comment) => (
         <div className="comment">
-          <img src={comment.profilePicture} alt="" />
+          <img className="comment-img" src={comment.profilePicture} alt="" />
           <div className="info">
-            <span>{comment.name}</span>
+            <span>{username}</span>
             <p>{comment.desc}</p>
           </div>
           <span className="date">1 hour ago</span>

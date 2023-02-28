@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../store/authContext";
-
+import { Icon } from "@iconify/react";
 import "animate.css/animate.min.css";
 
 const Form = () => {
@@ -48,7 +48,7 @@ const Form = () => {
   return (
     <div className="post-container">
       <div className="post-box">
-        <h2>Add Post</h2>
+        <h2 className="post-title">Add Post</h2>
         <form
           className=""
           onSubmit={handleSubmit}
@@ -61,18 +61,19 @@ const Form = () => {
             onChange={(e) => setTitle(e.target.value)}
             className="form-input "
           />
-          {file && <img src={URL.createObjectURL(file)} />}
+          {file && <img className="add-img" src={URL.createObjectURL(file)} />}
           <input
-            type="file"
-            name="file"
-            onChange={handleInputImage}
-            className=""
-          />
-          <textarea
             type="text"
             placeholder="content"
             value={content}
             onChange={(e) => setContent(e.target.value)}
+            className=""
+          />
+          
+          <input
+            type="file"
+            name="file"
+            onChange={handleInputImage}
             className=""
           />
           <div className="">
@@ -100,7 +101,7 @@ const Form = () => {
               />
             </div>
           </div>
-          <button className="btn btn-primary">submit</button>
+          <button  className="btn btn-primary">submit</button>
         </form>
       </div>
     </div>

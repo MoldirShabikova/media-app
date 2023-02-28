@@ -7,10 +7,8 @@ import AuthContext from "../store/authContext";
 
 const Header = () => {
   const authCtx = useContext(AuthContext);
-  const username = localStorage.getItem("username");
   const image = localStorage.getItem("image")
 
- 
 
   return (
     <nav>

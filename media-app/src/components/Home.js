@@ -5,15 +5,16 @@ import AuthContext from "../store/authContext";
 import Stories from './Stories'
 import Comments from "./Comments";
 import { Icon } from "@iconify/react";
-
+import moment from "moment"
 const Home = () => {
   const url = "http://localhost:8080";
-  const { userId, image } = useContext(AuthContext);
-
+  const { userId } = useContext(AuthContext);
+const image = localStorage.getItem("image");
+const content = localStorage.getItem("content");
   const [posts, setPosts] = useState([]);
 
    const [commentOpen, setCommentOpen] = useState(false);
-  
+  const liked =false
   useEffect(() => {
     axios
       .get(`${url}/posts`)
@@ -31,7 +32,7 @@ const Home = () => {
         console.log(err);
       });
   }, [posts]);
-
+console.log(posts, 'data')
   const mappedPosts = posts.map((post) => {
     return (
       <div className="middle">
@@ -42,55 +43,37 @@ const Home = () => {
                 <div className="profile-photo">
                   <img src={image} alt="person" />
                 </div>
-                <div className="info">
+                <div className="ingo">
                   <h3>{post.user.username}</h3>
-                  <small>{post.content}</small>
+                  <small>{moment(post.createdAt).fromNow()}</small>
                 </div>
               </div>
               <span className="edit">
                 <i className="uil uil-ellipsis-h"> </i>
               </span>
-              <div className="">
+              <p>{post.title}</p>
+              <div className="photo">
                 <img src={`./upload/${post.image}`} />
               </div>
               <div className="action-button">
                 <div className="interaction-buttons">
-                  <span>
+                  {liked ? (
+                    <Icon icon="openmoji:red-heart" />
+                  ) : (
                     <Icon icon="uil:heart" />
-                  </span>
-                  <span>
-                    <Icon icon="uil:comments-alt" />
-                  </span>
-                  <span>
-                    <i className="uil uil-share-alt"></i>
-                  </span>
+                  )}
+                  5 Likes
+                  <Icon
+                    icon="uil:comments-alt"
+                    onClick={() => setCommentOpen(!commentOpen)}
+                  />
+                  2 Comments
                 </div>
                 <div className="bookmark">
-                  <span>
-                    <i className="uil uil-bookmark-full"></i>
-                  </span>
+                  <i className="uil uil-bookmark-full"></i>
                 </div>
               </div>
-              <div className="liked-by">
-                {/* <span>
-                      <img src="./assests/images/profile-10.jpg" alt="" />
-                    </span>
-                    <span>
-                      <img src="./assests/images/profile-4.jpg" alt="" />
-                    </span>
-                    <span>
-                      <img src="./assests/images/profile-15.jpg" alt="" />
-                    </span> */}
-                <p>
-                  Liked by <b>Ernest </b> and <b>2,300 others</b>
-                </p>
-              </div>
-              <div className="caption">
-                <p>
-                  <b>{post.user.userName}</b>
-                  {post.title}
-                </p>
-              </div>
+
               <div
                 className="item"
                 onClick={() => setCommentOpen(!commentOpen)}
