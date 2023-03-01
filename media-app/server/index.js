@@ -18,6 +18,13 @@ const {
   editPost,
   deletePost,
 } = require("./controllers/posts");
+ 
+const {
+  getAllComments,
+  addComment,
+  deleteComment,
+} = require("./controllers/comments");
+
 const app = express();
 
 app.use(express.json());
@@ -36,6 +43,7 @@ const upload = multer({ storage: storage });
 
 User.hasMany(Post);
 Post.belongsTo(User);
+
 User.hasMany(Comments);
 Comments.belongsTo(User);
 Post.hasMany(Comments)
@@ -51,6 +59,10 @@ app.get("/userposts/:userId", getCurrentUserPosts);
 app.post("/posts", isAuthenticated, upload.single("file"), addPost);
 app.put("/posts/:id", isAuthenticated, upload.single("file"), editPost);
 app.delete("/posts/:id", isAuthenticated, deletePost);
+
+app.get('/comments/:postId', getAllComments)
+app.post('/comments', addComment)
+app.delete("/comments", deleteComment);
 
 //connecting to my backend
 sequelize

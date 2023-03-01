@@ -1,19 +1,25 @@
 const { Post } = require("../models/post");
 const { User } = require("../models/user");
+const { Comments } = require("../models/comments");
 
 module.exports = {
   getAllPosts: async (req, res) => {
     try {
       const posts = await Post.findAll({
-        where: { privateStatus: false },
-        include: [
-          {
-            model: User,
-            required: true,
-            attributes: [`username`],
+    
+        include: {
+          model: User,
+         
+          attributes: [`username`],
+          include: {
+              model: Comments,
+           
+              attributes: [`description`],
           },
-        ],
+        },
+  
       });
+      console.log('posts', posts)
       res.status(200).send(posts);
     } catch (error) {
       console.log("ERROR IN getAllPosts");

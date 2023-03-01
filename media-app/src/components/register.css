@@ -1,9 +1,23 @@
+.r-post-container{
+  width: 80%;
+  display: flex;
+height: 60vh;
+ flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 3rem;
+  
+  padding: 0.4rem var(--card-padding);
+  border-radius: var(--border-radius);
+position: absolute;
+left: 800px;
 
-.form {
-  width: 100%;
-  margin-top: 20px;
 }
-
+.r-post-box{
+background: transparent;
+color: var(--color-dark);
+margin: 0 auto;
+}
 label {
   display: block;
   margin-bottom: 10px;
@@ -108,6 +122,7 @@ button:hover {
   font-weight: 700;
   color: #333;
 }
-.links{
-    margin: 20px;
+
+.links {
+  margin: 20px;
 }

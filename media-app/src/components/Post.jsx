@@ -23,8 +23,6 @@ const Form = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(userId, 'userID')
-    console.log(localStorage.getItem('userId', userId))
     const formData = new FormData();
     formData.append("title", title);
     formData.append("content", content);
@@ -67,14 +65,14 @@ const Form = () => {
             placeholder="content"
             value={content}
             onChange={(e) => setContent(e.target.value)}
-            className=""
+            className=" form-input "
           />
-          
+
           <input
             type="file"
             name="file"
             onChange={handleInputImage}
-            className=""
+            className="form-input "
           />
           <div className="">
             <div className="radio-btn">
@@ -101,7 +99,7 @@ const Form = () => {
               />
             </div>
           </div>
-          <button  className="btn btn-primary">submit</button>
+          <button className="btn btn-primary">submit</button>
         </form>
       </div>
     </div>

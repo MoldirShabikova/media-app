@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import AuthContext from "../store/authContext";
+import './login.css'
 
 function Login({setLogin}) {
   // const [isLogin, setIsLogin] = useState(false);
@@ -50,12 +51,13 @@ const navigateTo = () => {
   setLogin(false);
 };
   return (
-    <div className="login">
-      <div className="card">
-        <div>
-          <h1>Log in</h1>
+    <div className="l-post-container">
+      <div className="l-post-box">
+        
+         
 
-          <form onSubmit={handleSubmit} className="form">
+        <form onSubmit={handleSubmit} className="form">
+          <h1>Log in</h1>
             <label htmlFor="email">
               Email
               <input
@@ -111,7 +113,7 @@ const navigateTo = () => {
             </div>
           </form>
         </div>
-      </div>
+
     </div>
   );
 }

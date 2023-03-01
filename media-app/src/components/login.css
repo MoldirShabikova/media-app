@@ -1,36 +1,23 @@
-.login {
+.l-post-container{
+  width: 80%;
   display: flex;
-  justify-content: center;
+height: 60vh;
+ flex-direction: row;
   align-items: center;
-  height: 100vh;
-  background: #f8f8f8;
-}
+  justify-content: space-between;
+  margin-top: 3rem;
+  
+  padding: 0.4rem var(--card-padding);
+  border-radius: var(--border-radius);
+position: absolute;
+left: 200px;
 
-.card {
-  width: 100%;
-  max-width: 400px;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
-  padding: 40px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
-
-.card h1 {
-  margin: 0 0 20px 0;
-  font-size: 24px;
-  font-weight: 700;
-  text-align: center;
-  color: #333;
+.l-post-box{
+background: transparent;
+color: var(--color-dark);
+margin: 0 auto;
 }
-
-.form {
-  width: 100%;
-  margin-top: 20px;
-}
-
 label {
   display: block;
   margin-bottom: 10px;
@@ -40,7 +27,8 @@ label {
 }
 
 input[type="email"],
-input[type="password"] {
+input[type="password"],
+input[type="text"] {
   width: 100%;
   height: 48px;
   border-radius: 5px;
@@ -135,6 +123,6 @@ button:hover {
   color: #333;
 }
 
-.links{
-    margin: 20px;
+.links {
+  margin: 20px;
 }

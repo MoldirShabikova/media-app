@@ -1,8 +1,6 @@
 import { useContext, useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import AuthContext from "../store/authContext";
-import { Icon } from "@iconify/react";
-import Header from "./Header";
 import LeftProfile from "./LeftProfile";
 import  MyProfile from './MyProfile'
 const Profile = () => {

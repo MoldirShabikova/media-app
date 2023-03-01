@@ -61,12 +61,11 @@ const navigateTo = () => {
 };
 
   return (
-    <div className="login">
-      <div className="card">
-        <div>
-          <h1>Register</h1>
-
+    <div className="r-post-container">
+      <div>
+        <div className="r-post-box">
           <form onSubmit={handleSubmit} className="form">
+            <h1>Register</h1>
             <label htmlFor="name">
               Name
               <input

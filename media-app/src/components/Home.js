@@ -24,15 +24,17 @@ const content = localStorage.getItem("content");
             (post) => userId !== post.userId
           );
           setPosts(otherUsersPosts);
+             console.log("posts", res.data);
         } else {
           setPosts(res.data);
+        
         }
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [posts]);
-console.log(posts, 'data')
+  }, []);
+
   const mappedPosts = posts.map((post) => {
     return (
       <div className="middle">

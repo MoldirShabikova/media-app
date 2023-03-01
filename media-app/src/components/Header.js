@@ -10,11 +10,12 @@ const Header = () => {
   const image = localStorage.getItem("image")
 
 
+
   return (
     <nav>
       <div className="container">
         <NavLink to="/" className="logo">
-          Social App
+          Social Media App
         </NavLink>
         <div className="search-bar">
           <i className="uil uil-search"></i>

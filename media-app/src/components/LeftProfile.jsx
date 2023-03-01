@@ -28,10 +28,15 @@ function LeftProfile() {
 
       <div className="sidebar">
         <a className="menu-item active">
+         
+          
+                    <NavLink to="/" > 
           <span>
             <Icon icon="material-symbols:house-outline-rounded" />
           </span>
-          <h3>Home</h3>
+
+            <h3>Home</h3>
+          </NavLink>
         </a>
         <a className="menu-item">
           <span>
@@ -44,16 +49,7 @@ function LeftProfile() {
             <Icon icon="mdi:bell-outline" />
           </span>
           <h3>Notifications</h3>
-          {/* <div className="notifications-popup">
-            <div>
-              <div className="profile-photo">
-                <img src="./assests/images/profile-2.jpg" alt="Profile photo" />
-              </div>
-              <div className="notification-body">
-                <b>Adam Barold</b>
-              </div>
-            </div>
-          </div> */}
+  
         </a>
         <a className="menu-item">
           <span>
