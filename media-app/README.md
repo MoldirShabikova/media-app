@@ -1,18 +1,32 @@
-# Getting Started with Create React App
+# Full Stack Social Media App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a social media app that allows users to create accounts, share posts, follow other users, and comment on posts. It was built using the following technologies:
 
-## Available Scripts
+React
+React Router DOM
+CSS
+JavaScript
+Bit.io
+Node.js
+Express
+PostgreSQL
+JWT
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+In the project directory, you can run:The app has the following features:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+User authentication (register, login, logout)
+User profile page (view user information and posts)
+Create, view, edit, and delete posts
+Follow other users and view their posts
+Comment on posts
+Pagination for posts and comments
+Search for posts by keyword
+Like posts
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+
+
 
 ### `npm test`
 
