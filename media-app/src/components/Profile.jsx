@@ -71,7 +71,7 @@ console.log(userId, 'userID')
                 <div>
                   <button
                     className="btn btn-primary"
-                    style={{ width: 100 }}
+                    style={{ display:"flex", width: 100 }}
                     onClick={() => updatePost(post.id, post.privateStatus)}
                   >
                     {post.privateStatus ? "make public" : "make private"}
@@ -79,7 +79,7 @@ console.log(userId, 'userID')
                   <button
                     className="btn btn-primary"
                     icon="material-symbols:delete-outline"
-                    style={{ marginLeft: 10, width: 100 }}
+                    style={{  width: 100 }}
                     onClick={() => deletePost(post.id)}
                   >
                     Delete{" "}

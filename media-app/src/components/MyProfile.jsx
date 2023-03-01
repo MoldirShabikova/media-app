@@ -1,11 +1,6 @@
-import { useContext, useEffect, useState, useCallback } from "react";
 import "./profile.css";
-
-import AuthContext from "../store/authContext";
 import { Icon } from "@iconify/react";
 
-
-import Stories from "./Stories";
 const MyProfile = () => {
  
 const image = localStorage.getItem("image");

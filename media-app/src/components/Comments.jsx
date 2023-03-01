@@ -4,15 +4,18 @@ import AuthContext from "../store/authContext";
 import axios from "axios";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
+import Home from "./Home";
+import { Icon } from "@iconify/react";
 const url = "http://localhost:8080";
 
-const Comments = ({ postId }) => {
+
+const Comments = ({ postId, comments, setComments }) => {
   const { token } = useContext(AuthContext);
   const username = localStorage.getItem("username");
   const image = localStorage.getItem("image");
   const [comment, setComment] = useState("");
-  const [comments, setComments] = useState([]);
-console.log(comment, 'allcomment')
+
+  console.log(comment, "allcomment");
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -46,31 +49,33 @@ console.log(comment, 'allcomment')
   }, [postId]);
 
   return (
-    <div className="comments">
-      <form className="write" onSubmit={handleSubmit}>
-        <img className="comment-img" src={image} alt="" />
-        <input
-          className="comment-input"
-          type="text"
-          placeholder="write a comment"
-          value={comment}
-          onChange={(e) => setComment(e.target.value)}
-        />
-        <button className="comment-btn" type="submit">
-          Send
-        </button>
-      </form>
-      {comments.map((comment) => (
-        <div className="comment" key={comment.id}>
+    <>
+      <div className="comments">
+        <form className="write" onSubmit={handleSubmit}>
           <img className="comment-img" src={image} alt="" />
-          <div className="info">
-            <span>{username}</span>
-            <p>{comment.description}</p>
+          <input
+            className="comment-input"
+            type="text"
+            placeholder="write a comment"
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+          />
+          <button className="comment-btn" type="submit">
+            Send
+          </button>
+        </form>
+        {comments.map((comment) => (
+          <div className="comment" key={comment.id}>
+            <img className="comment-img" src={image} alt="" />
+            <div className="info">
+              <span>{username}</span>
+              <p>{comment.description}</p>
+            </div>
+            <span className="date">{moment(comment.createdAt).fromNow()}</span>
           </div>
-          <span className="date">{moment(comment.createdAt).fromNow()}</span>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
+    </>
   );
 };
 

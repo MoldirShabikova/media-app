@@ -6,15 +6,16 @@ import Stories from './Stories'
 import Comments from "./Comments";
 import { Icon } from "@iconify/react";
 import moment from "moment"
+
 const Home = () => {
   const url = "http://localhost:8080";
   const { userId } = useContext(AuthContext);
-const image = localStorage.getItem("image");
-const content = localStorage.getItem("content");
+  const image = localStorage.getItem("image");
   const [posts, setPosts] = useState([]);
+  const [commentOpen, setCommentOpen] = useState(false);
+  const [comments, setComments] = useState([]);
+  const [likes, setLikes] = useState({});
 
-   const [commentOpen, setCommentOpen] = useState(false);
-  const liked =false
   useEffect(() => {
     axios
       .get(`${url}/posts`)
@@ -24,16 +25,35 @@ const content = localStorage.getItem("content");
             (post) => userId !== post.userId
           );
           setPosts(otherUsersPosts);
-             console.log("posts", res.data);
         } else {
           setPosts(res.data);
-        
         }
+        // initialize the likes state with the number of likes for each post
+        const initialLikes = {};
+        res.data.forEach((post) => {
+          initialLikes[post.id] = post.likes.length;
+        });
+        setLikes(initialLikes);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
+
+  const handleLike = (postId) => {
+    // check if the post is already liked by the user
+    if (likes[postId]) {
+      setLikes((prevLikes) => ({
+        ...prevLikes,
+        [postId]: prevLikes[postId] - 1, // decrease the number of likes by 1
+      }));
+    } else {
+      setLikes((prevLikes) => ({
+        ...prevLikes,
+        [postId]: 1, // increase the number of likes by 1
+      }));
+    }
+  };
 
   const mappedPosts = posts.map((post) => {
     return (
@@ -43,7 +63,7 @@ const content = localStorage.getItem("content");
             <div className="head" key={post.id}>
               <div className="user">
                 <div className="profile-photo">
-                  <img src={image} alt="person" />
+                  <img src={image} alt="profile-img" />
                 </div>
                 <div className="ingo">
                   <h3>{post.user.username}</h3>
@@ -59,17 +79,16 @@ const content = localStorage.getItem("content");
               </div>
               <div className="action-button">
                 <div className="interaction-buttons">
-                  {liked ? (
-                    <Icon icon="openmoji:red-heart" />
-                  ) : (
-                    <Icon icon="uil:heart" />
-                  )}
-                  5 Likes
+                  <Icon
+                    icon={likes[post.id] ? "openmoji:red-heart" : "uil:heart"}
+                    onClick={() => handleLike(post.id)}
+                  />
+                  {likes[post.id] || 0} Likes
                   <Icon
                     icon="uil:comments-alt"
                     onClick={() => setCommentOpen(!commentOpen)}
                   />
-                  2 Comments
+                  {comments.length} Comments
                 </div>
                 <div className="bookmark">
                   <i className="uil uil-bookmark-full"></i>
@@ -83,7 +102,13 @@ const content = localStorage.getItem("content");
                 See Comments
               </div>
             </div>
-            {commentOpen && <Comments postId={post.id} />}
+            {commentOpen && (
+              <Comments
+                comments={comments}
+                setComments={setComments}
+                postId={post.id}
+              />
+            )}
           </div>
         </div>
       </div>
